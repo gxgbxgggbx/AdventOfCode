@@ -20,9 +20,14 @@ def parseLine(Line):
     return finalList
 
 with open(sys.argv[1]) as puzzleInput:
+    power = 0
     for Line in puzzleInput.readlines():
         isInvalid = False
         lineList = parseLine(Line)
+        lineRmax = 0
+        lineGmax = 0
+        lineBmax = 0
+        print(lineList)
         for i in lineList:
             if isinstance(i, int):
                 if (not isInvalid):
@@ -52,4 +57,12 @@ with open(sys.argv[1]) as puzzleInput:
                                     isInvalid=True
                             case _:
                                 print("_")
-print(validTotal)
+                    if red > lineRmax:
+                        lineRmax = red
+                    if green > lineGmax:
+                        lineGmax = green
+                    if blue > lineBmax:
+                        lineBmax = blue
+        power += lineRmax*lineGmax*lineBmax
+print(f"total: {validTotal}")
+print(f"power: {power}")
